@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Etudiant;
+use App\Entity\Fillier;
+use App\Entity\Niveau;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -54,13 +56,32 @@ class EtudiantRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Etudiant
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findScolariterterByFillier(Fillier $fillier)
+    {
+        return $this->createQueryBuilder('e')
+            ->select("SUM(e.scolariter_payer) as payer")
+            ->andWhere('e.fillier = :val')
+            ->setParameter('val', $fillier)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    public function countEtudiantByNiveau(Niveau $niveau)
+    {
+        return $this->createQueryBuilder('e')
+            ->select("COUNT(e.id)")
+            ->andWhere('e. = :val')
+            ->setParameter('val', $niveau)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+    public function findScolariterterTotal()
+    {
+        return $this->createQueryBuilder('e')
+            ->select("SUM(e.scolariter_payer) as payer")
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
 }

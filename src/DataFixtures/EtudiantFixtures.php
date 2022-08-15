@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 use App\Entity\Etudiant;
 use App\Entity\Fillier;
 use App\Repository\FillierRepository;
-use App\Repository\NiveauRepository;
 use App\Repository\PromotionRepository;
 use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;

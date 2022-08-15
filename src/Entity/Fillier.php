@@ -18,12 +18,15 @@ class Fillier
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\ManyToOne(inversedBy: 'filliers')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Niveau $niveau = null;
 
     #[ORM\OneToMany(mappedBy: 'fillier', targetEntity: Etudiant::class)]
     private Collection $etudiants;
+
+    #[ORM\Column]
+    private ?int $niveau = null;
+
+    #[ORM\Column]
+    private ?int $scolariterApayer = null;
 
     public function __construct()
     {
@@ -43,18 +46,6 @@ class Fillier
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getNiveau(): ?Niveau
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(?Niveau $niveau): self
-    {
-        $this->niveau = $niveau;
 
         return $this;
     }
@@ -85,6 +76,30 @@ class Fillier
                 $etudiant->setFillier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNiveau(): ?int
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(int $niveau): self
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    public function getScolariterApayer(): ?int
+    {
+        return $this->scolariterApayer;
+    }
+
+    public function setScolariterApayer(int $scolariterApayer): self
+    {
+        $this->scolariterApayer = $scolariterApayer;
 
         return $this;
     }

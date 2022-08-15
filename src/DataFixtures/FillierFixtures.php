@@ -2,7 +2,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Fillier;
-use App\Repository\NiveauRepository;
 use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -13,49 +12,54 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class FillierFixtures extends Fixture implements OrderedFixtureInterface
 {
-    public function __construct(NiveauRepository $niveauRepository)
+    public function __construct()
     {
-        $this->niveauRepository = $niveauRepository;
     }
 
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create("fr_FR");
 
-        $niveau=$this->niveauRepository->find(1);
+
         $fillier = new Fillier();
         $fillier->setNom("L1 Rh")
-                ->setNiveau($niveau);
+                ->setNiveau(1)
+                ->setScolariterApayer(700000);
         $manager->persist($fillier);
 
-        $niveau=$this->niveauRepository->find(2);
+
         $fillier = new Fillier();
-        $fillier->setNom("L1 Rh")
-                ->setNiveau($niveau);
+        $fillier->setNom("L2 Rh")
+                ->setNiveau(2)
+                ->setScolariterApayer(800000);
         $manager->persist($fillier);
 
-        $niveau=$this->niveauRepository->find(3);
+
         $fillier = new Fillier();
-        $fillier->setNom("L1 Rh")
-                ->setNiveau($niveau);
+        $fillier->setNom("L3 Rh")
+                ->setNiveau(3)
+                ->setScolariterApayer(900000);
         $manager->persist($fillier);
 
-        $niveau=$this->niveauRepository->find(1);
-        $fillier = new Fillier();
-        $fillier->setNom("L1 imformatique")
-                ->setNiveau($niveau);
-        $manager->persist($fillier);
 
-        $niveau=$this->niveauRepository->find(2);
         $fillier = new Fillier();
         $fillier->setNom("L1 imformatique")
-                ->setNiveau($niveau);
+                ->setNiveau(1)
+                ->setScolariterApayer(700000);
         $manager->persist($fillier);
 
-        $niveau=$this->niveauRepository->find(3);
+
         $fillier = new Fillier();
-        $fillier->setNom("L1 imformatique")
-                ->setNiveau($niveau);
+        $fillier->setNom("L2 imformatique")
+                ->setNiveau(2)
+                ->setScolariterApayer(800000);
+        $manager->persist($fillier);
+
+
+        $fillier = new Fillier();
+        $fillier->setNom("L3 imformatique")
+                ->setNiveau(3)
+                ->setScolariterApayer(900000);
         $manager->persist($fillier);
 
         $manager->flush();

@@ -54,13 +54,15 @@ class FillierRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Fillier
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findOneBySomeField($value): ?Fillier
+    {
+        return $this->createQueryBuilder('f')
+            ->join('f.etudiants','e')
+            ->select('e.scolariter_payer as payer')
+            ->select('e.scolariter_payer as payer')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

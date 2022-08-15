@@ -43,6 +43,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
                 ->setRoles(['ROLE_ADMIN']);
             $manager->persist($user);
         }
+        $manager->flush();
     }
 
     public function getOrder()

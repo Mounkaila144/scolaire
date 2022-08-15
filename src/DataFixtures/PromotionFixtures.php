@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Niveau;
 use App\Entity\Promotion;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
