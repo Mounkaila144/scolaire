@@ -54,15 +54,15 @@ class FillierRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-    public function findOneBySomeField($value): ?Fillier
+    public function findByNiveau($value)
     {
         return $this->createQueryBuilder('f')
+            ->where('f.niveau=:val')
             ->join('f.etudiants','e')
-            ->select('e.scolariter_payer as payer')
-            ->select('e.scolariter_payer as payer')
+            ->select('COUNT(e.id)')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getSingleScalarResult()
         ;
     }
 }

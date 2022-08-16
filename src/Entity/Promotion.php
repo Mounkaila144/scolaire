@@ -22,9 +22,13 @@ class Promotion
     #[ORM\OneToMany(mappedBy: 'promotion', targetEntity: Etudiant::class)]
     private Collection $etudiants;
 
+    #[ORM\OneToMany(mappedBy: 'promotion', targetEntity: Fillier::class)]
+    private Collection $filliers;
+
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
+        $this->filliers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,6 +72,36 @@ class Promotion
             // set the owning side to null (unless already changed)
             if ($etudiant->getPromotion() === $this) {
                 $etudiant->setPromotion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Fillier>
+     */
+    public function getFilliers(): Collection
+    {
+        return $this->filliers;
+    }
+
+    public function addFillier(Fillier $fillier): self
+    {
+        if (!$this->filliers->contains($fillier)) {
+            $this->filliers->add($fillier);
+            $fillier->setPromotion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFillier(Fillier $fillier): self
+    {
+        if ($this->filliers->removeElement($fillier)) {
+            // set the owning side to null (unless already changed)
+            if ($fillier->getPromotion() === $this) {
+                $fillier->setPromotion(null);
             }
         }
 

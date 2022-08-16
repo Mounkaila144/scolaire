@@ -28,6 +28,10 @@ class Fillier
     #[ORM\Column]
     private ?int $scolariterApayer = null;
 
+    #[ORM\ManyToOne(inversedBy: 'filliers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Promotion $promotion = null;
+
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
@@ -100,6 +104,18 @@ class Fillier
     public function setScolariterApayer(int $scolariterApayer): self
     {
         $this->scolariterApayer = $scolariterApayer;
+
+        return $this;
+    }
+
+    public function getPromotion(): ?Promotion
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?Promotion $promotion): self
+    {
+        $this->promotion = $promotion;
 
         return $this;
     }
