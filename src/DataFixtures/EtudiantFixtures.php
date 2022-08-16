@@ -15,10 +15,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class EtudiantFixtures extends Fixture implements OrderedFixtureInterface
 {
-    public function __construct(FillierRepository $fillierRepository,PromotionRepository $promotionRepository)
+    public function __construct(FillierRepository $fillierRepository)
     {
         $this->fillierRepository = $fillierRepository;
-        $this->promotionRepository = $promotionRepository;
     }
 
     public function load(ObjectManager $manager)
@@ -27,7 +26,6 @@ class EtudiantFixtures extends Fixture implements OrderedFixtureInterface
 
         for ($i = 0; $i <= 20; $i++) {
             $fillier = $this->fillierRepository->find($faker->numberBetween(1,6));
-            $promotion = $this->promotionRepository->find(1);
             $etudiant = new Etudiant();
             $etudiant->setNom($faker->firstName)
                 ->setPrenom($faker->lastName)
@@ -35,7 +33,6 @@ class EtudiantFixtures extends Fixture implements OrderedFixtureInterface
                 ->setFillier($fillier)
                 ->setNumero($faker->numberBetween(45,852))
                 ->setInscriptionPayer($faker->boolean)
-                ->setPromotion($promotion)
                 ->setScolariterPayer($faker->numberBetween(100000,400000));
         $manager->persist($etudiant);
         }

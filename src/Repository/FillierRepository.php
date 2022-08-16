@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Fillier;
+use App\Entity\Promotion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -53,14 +54,25 @@ class FillierRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
-
-    public function findByNiveau($value)
+    public function findByPromotion(Promotion $promotion)
     {
         return $this->createQueryBuilder('f')
-            ->where('f.niveau=:val')
+            ->where('f.promotion=:val')
+            ->setParameter('val', $promotion)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByNiveau($value,Promotion $promotion)
+    {
+        return $this->createQueryBuilder('f')
+            ->andwhere('f.niveau=:val')
+            ->andwhere('f.promotion=:pro')
             ->join('f.etudiants','e')
             ->select('COUNT(e.id)')
             ->setParameter('val', $value)
+            ->setParameter('pro', $promotion)
             ->getQuery()
             ->getSingleScalarResult()
         ;

@@ -21,6 +21,14 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/allow', name: 'app_user_allow', methods: ['GET'])]
+    public function allow(UserRepository $userRepository): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'users' => $userRepository->findBy(["autoriser"=>true]),
+        ]);
+    }
+
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
     {
@@ -51,28 +59,29 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->add($user, true);
+            $userRepository->add($user->setAutoriser(true), true);
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
+            return $this->redirectToRoute('app_user_index');
 
-        return $this->renderForm('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
     }
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('/{id}/enlever', name: 'app_user_enlever', methods: ['GET', 'POST'])]
+    public function enlever(Request $request, User $user, UserRepository $userRepository): Response
+    {
+
+        $userRepository->add($user->setAutoriser(false), true);
+
+        return $this->redirectToRoute('app_user_index');
+
+    }
+
+    #[Route('/remove/{id}', name: 'app_user_delete', methods: ['POST','GET'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
-        }
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+
+        return $this->redirectToRoute('app_user_index');
     }
 }

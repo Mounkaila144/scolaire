@@ -39,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
+    #[ORM\Column]
+    private ?bool $autoriser = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -141,6 +144,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function isAutoriser(): ?bool
+    {
+        return $this->autoriser;
+    }
+
+    public function setAutoriser(bool $autoriser): self
+    {
+        $this->autoriser = $autoriser;
 
         return $this;
     }

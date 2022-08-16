@@ -54,6 +54,12 @@ class Fillier
         return $this;
     }
 
+    public function __toString(): string
+    {
+        // TODO: Implement __toString() method.
+        return $this->getNom();
+    }
+
     /**
      * @return Collection<int, Etudiant>
      */

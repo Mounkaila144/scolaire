@@ -39,31 +39,34 @@
                     <div class="collapse menu-dropdown" id="sidebarDashboards">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="" class="nav-link" data-key="t-analytics"> Compteur </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link" data-key="t-crm">Statistique</a>
+                                <a href="{{ path("app_admin") }}" class="nav-link" data-key="t-analytics"> Compteur </a>
                             </li>
                         </ul>
                     </div>
                 </li> <!-- end Dashboard Menu -->
                 <li class="nav-item">
                     <a class="nav-link " href="{{ path("app_user_index") }}">
-                        <i class="ri-secure-payment-fill"></i> <span data-key="t-pages">Valider un Admin</span>
+                        <i class="ri-cloud-fill"></i> <span data-key="t-pages">Autoriser un Admin</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
-                        <i class="ri-add-box-fill"></i> <span data-key="t-pages">Ajouter un Niveau</span>
+                    <a class="nav-link " href="{{ path("app_user_allow") }}">
+                        <i class="ri-admin-fill"></i> <span data-key="t-pages">Liste Admin autoriser</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('app_promotion_new') }}">
+                        <i class="ri-add-box-fill"></i> <span data-key="t-pages">Ajouter un Promotion</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link " href="{{ path('app_fillier_new') }}">
                         <i class="ri-add-circle-fill"></i> <span data-key="t-pages">Ajouter un fillier</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link " href="{{ path('app_etudiant_new') }}">
                         <i class="ri-file-add-fill"></i> <span data-key="t-pages">Ajouter un etudiant</span>
                     </a>
                 </li>
@@ -76,12 +79,12 @@
                     <div class="collapse menu-dropdown" id="sidebarAuth">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ path('app_user_index') }}" class="nav-link" data-key="t-analytics">
+                                <a href="{{ path('app_etudiant_index') }}" class="nav-link" data-key="t-analytics">
                                     Tout les etudiants </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ path('app_user_index') }}" class="nav-link" data-key="t-analytics">
+                                <a href="{{ path('app_etudiant_index') }}" class="nav-link" data-key="t-analytics">
                                     Filtrage Etudiants </a>
                             </li>
 
@@ -89,14 +92,6 @@
                         </ul>
                     </div>
                 </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link " href="#">
-                        <i class="ri-pages-line"></i> <span data-key="t-pages">Verification publication</span>
-                    </a>
-                </li>
-
             </ul>
         </div>
         <!-- Sidebar -->

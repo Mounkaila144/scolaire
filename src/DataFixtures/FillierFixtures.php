@@ -49,7 +49,7 @@ class FillierFixtures extends Fixture implements OrderedFixtureInterface
                 ->setScolariterApayer(900000);
         $manager->persist($fillier);
 
-        $pro="2022";
+        $pro="2023";
         $year=new \DateTime("$pro-01-01");
         $promo=$this->promotionRepository->findOneBy(["annee"=>$year]);
         $fillier = new Fillier();

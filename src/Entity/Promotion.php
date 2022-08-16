@@ -19,9 +19,6 @@ class Promotion
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $annee = null;
 
-    #[ORM\OneToMany(mappedBy: 'promotion', targetEntity: Etudiant::class)]
-    private Collection $etudiants;
-
     #[ORM\OneToMany(mappedBy: 'promotion', targetEntity: Fillier::class)]
     private Collection $filliers;
 
@@ -30,6 +27,14 @@ class Promotion
         $this->etudiants = new ArrayCollection();
         $this->filliers = new ArrayCollection();
     }
+
+    public function __toString(): string
+    {
+        // TODO: Implement __toString() method.
+        $an=$this->annee->format("y");
+        return "20$an";
+    }
+
 
     public function getId(): ?int
     {
@@ -44,36 +49,6 @@ class Promotion
     public function setAnnee(\DateTimeInterface $annee): self
     {
         $this->annee = $annee;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Etudiant>
-     */
-    public function getEtudiants(): Collection
-    {
-        return $this->etudiants;
-    }
-
-    public function addEtudiant(Etudiant $etudiant): self
-    {
-        if (!$this->etudiants->contains($etudiant)) {
-            $this->etudiants->add($etudiant);
-            $etudiant->setPromotion($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEtudiant(Etudiant $etudiant): self
-    {
-        if ($this->etudiants->removeElement($etudiant)) {
-            // set the owning side to null (unless already changed)
-            if ($etudiant->getPromotion() === $this) {
-                $etudiant->setPromotion(null);
-            }
-        }
 
         return $this;
     }

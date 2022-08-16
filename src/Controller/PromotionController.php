@@ -66,13 +66,11 @@ class PromotionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_promotion_delete', methods: ['POST'])]
+    #[Route('/remove/{id}', name: 'app_promotion_delete', methods: ['POST','GET'])]
     public function delete(Request $request, Promotion $promotion, PromotionRepository $promotionRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$promotion->getId(), $request->request->get('_token'))) {
             $promotionRepository->remove($promotion, true);
-        }
 
-        return $this->redirectToRoute('app_promotion_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_promotion_index');
     }
 }

@@ -36,7 +36,11 @@
                 <td>{{ etudiant.inscriptionPayer ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
-    </table>
+   </table>
+        </div>
+    </div>
+
+    {{ encore_entry_script_tags('datatable') }}
 
     <a href="{{ path('app_etudiant_index') }}">back to list</a>
 

@@ -14,6 +14,7 @@ class FillierType extends AbstractType
         $builder
             ->add('nom')
             ->add('niveau')
+            ->add('promotion')
             ->add('scolariterApayer')
         ;
     }

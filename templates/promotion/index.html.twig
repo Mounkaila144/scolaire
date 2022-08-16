@@ -3,9 +3,12 @@
 {% block title %}Promotion index{% endblock %}
 
 {% block body %}
-    <h1>Promotion index</h1>
-
-    <table class="table">
+   <div class="card">
+    <div class="card-header">
+        <h3 class="card-title mb-0">PROMOTIONS</h3>
+    </div>
+    <div class="card-body">
+        <table id="scroll-horizontal" class="table nowrap align-middle card-li table-datatable" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th>
@@ -17,11 +20,28 @@
         {% for promotion in promotions %}
             <tr>
                 <td>{{ promotion.id }}</td>
-                <td>{{ promotion.annee ? promotion.annee|date('Y-m-d') : '' }}</td>
+                <td>{{ promotion.annee ? promotion.annee|date('Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_promotion_show', {'id': promotion.id}) }}">show</a>
-                    <a href="{{ path('app_promotion_edit', {'id': promotion.id}) }}">edit</a>
+                    <div class="dropdown d-inline-block">
+                        <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ri-more-fill align-middle"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+                            <li><a href="{{ path('app_promotion_edit', {'id': promotion.id}) }}" class="dropdown-item edit-item-btn"><i
+                                            class="ri-pencil-fill align-bottom me-2 text-muted"></i> Editer</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_promotion_delete', {'id': promotion.id}) }}" class="dropdown-item remove-item-btn">
+                                    <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </td>
+
             </tr>
         {% else %}
             <tr>
@@ -29,7 +49,11 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+   </table>
+        </div>
+    </div>
+
+    {{ encore_entry_script_tags('datatable') }}
 
     <a href="{{ path('app_promotion_new') }}">Create new</a>
 {% endblock %}

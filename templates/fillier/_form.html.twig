@@ -1,4 +1,43 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title mb-0">Fillier</h3>
+    </div>
+    <div class="card-body">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom,{ 'attr': {'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_label(form.niveau) }}
+                    {{ form_widget(form.niveau,{ 'attr': {'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_label(form.promotion) }}
+                    {{ form_widget(form.promotion,{ 'attr': {'class':'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_label(form.scolariterApayer) }}
+                    {{ form_widget(form.scolariterApayer,{ 'attr': {'class':'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </div>
+
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+

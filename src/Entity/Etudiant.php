@@ -37,9 +37,6 @@ class Etudiant
     #[ORM\JoinColumn(nullable: false)]
     private ?Fillier $fillier = null;
 
-    #[ORM\ManyToOne(inversedBy: 'etudiants')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Promotion $promotion = null;
 
     public function __construct()
     {
@@ -134,15 +131,4 @@ class Etudiant
         return $this;
     }
 
-    public function getPromotion(): ?Promotion
-    {
-        return $this->promotion;
-    }
-
-    public function setPromotion(?Promotion $promotion): self
-    {
-        $this->promotion = $promotion;
-
-        return $this;
-    }
 }

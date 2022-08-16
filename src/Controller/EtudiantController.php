@@ -66,13 +66,12 @@ class EtudiantController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_etudiant_delete', methods: ['POST'])]
+    #[Route('/remove/{id}', name: 'app_etudiant_delete', methods: ['POST',"GET"])]
     public function delete(Request $request, Etudiant $etudiant, EtudiantRepository $etudiantRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$etudiant->getId(), $request->request->get('_token'))) {
             $etudiantRepository->remove($etudiant, true);
-        }
 
-        return $this->redirectToRoute('app_etudiant_index', [], Response::HTTP_SEE_OTHER);
+
+        return $this->redirectToRoute('app_etudiant_index');
     }
 }
