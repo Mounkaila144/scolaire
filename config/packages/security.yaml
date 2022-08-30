@@ -9,13 +9,26 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        app_prof_provider:
+            entity:
+                class: App\Entity\Prof
+                property: email
+        all:
+            chain:
+                providers: [ 'app_prof_provider','app_user_provider']
+        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: app_user_provider
+            provider: all
+            custom_authenticator: App\Security\UserAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

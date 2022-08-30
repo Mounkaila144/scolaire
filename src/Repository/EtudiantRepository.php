@@ -57,27 +57,50 @@ class EtudiantRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-    public function findEtudiantByPromotion(Promotion $value)
+    public function findEtudiantByPromotion( $value)
+    {
+            return $this->createQueryBuilder('e')
+                ->join('e.fillier', 'f')
+                ->andWhere('f.promotion=:val')
+                ->setParameter('val', $value)
+                ->getQuery()
+                ->getResult();
+    }
+
+    public function findEtudiantByPromotionAndFillier($value,$fillier)
     {
         return $this->createQueryBuilder('e')
-            ->join('e.fillier','f')
+            ->join('e.fillier', 'f')
             ->andWhere('f.promotion=:val')
+            ->andWhere('e.fillier=:fillier')
             ->setParameter('val', $value)
+            ->setParameter('fillier', $fillier)
+            ->orderBy('e.nom', 'ASC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
+    }
+    public function findEtudiantByFillier($fillier)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.fillier=:fillier')
+            ->setParameter('fillier', $fillier)
+            ->orderBy('e.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
 
-    public function findScolariterterTotalByPromotion(Promotion $value)
+    public function findScolariterterTotalByPromotion($value)
     {
-        return $this->createQueryBuilder('e')
-            ->join('e.fillier','f')
-            ->andWhere('f.promotion=:val')
-            ->setParameter('val', $value)
-            ->select("SUM(e.scolariter_payer) as payer")
-            ->getQuery()
-            ->getSingleScalarResult()
-            ;
+
+            return $this->createQueryBuilder('e')
+                ->join('e.fillier','f')
+                ->andWhere('f.promotion=:val')
+                ->setParameter('val', $value)
+                ->select("SUM(e.scolariter_payer) as payer")
+                ->getQuery()
+                ->getSingleScalarResult()
+                ;
+
     }
 }

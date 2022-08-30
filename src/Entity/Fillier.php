@@ -32,9 +32,13 @@ class Fillier
     #[ORM\JoinColumn(nullable: false)]
     private ?Promotion $promotion = null;
 
+    #[ORM\OneToMany(mappedBy: 'fillier', targetEntity: Presence::class)]
+    private Collection $presences;
+
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
+        $this->presences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,6 +126,36 @@ class Fillier
     public function setPromotion(?Promotion $promotion): self
     {
         $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Presence>
+     */
+    public function getPresences(): Collection
+    {
+        return $this->presences;
+    }
+
+    public function addPresence(Presence $presence): self
+    {
+        if (!$this->presences->contains($presence)) {
+            $this->presences->add($presence);
+            $presence->setFillier($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresence(Presence $presence): self
+    {
+        if ($this->presences->removeElement($presence)) {
+            // set the owning side to null (unless already changed)
+            if ($presence->getFillier() === $this) {
+                $presence->setFillier(null);
+            }
+        }
 
         return $this;
     }

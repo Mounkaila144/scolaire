@@ -10,9 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends AbstractController
+class ProfController extends AbstractController
 {
-    #[Route('/admin/{pro}', name: 'app_admin',priority: -1)]
+    #[Route('/prof/{pro}', name: 'app_prof')]
     public function index(UserRepository $userRepository,EtudiantRepository $etudiantRepository,
                           FillierRepository $fillierRepository,PromotionRepository $promotionRepository,$pro="2022"): Response
     {
@@ -47,7 +47,7 @@ class AdminController extends AbstractController
         $promotion=$promotionRepository->findAll();
 
 
-        return $this->render('admin/index.html.twig',[
+        return $this->render('admin/prof.html.twig',[
             'countfillier'=>count($countfillier),
             'countetudiant'=>count($countetudiant),
             'countadmin'=>count($countadmin),

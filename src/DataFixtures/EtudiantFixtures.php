@@ -24,7 +24,7 @@ class EtudiantFixtures extends Fixture implements OrderedFixtureInterface
     {
         $faker = Factory::create("fr_FR");
 
-        for ($i = 0; $i <= 20; $i++) {
+        for ($i = 0; $i <= 300; $i++) {
             $fillier = $this->fillierRepository->find($faker->numberBetween(1,6));
             $etudiant = new Etudiant();
             $etudiant->setNom($faker->firstName)

@@ -54,27 +54,28 @@ class FillierRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
-    public function findByPromotion(Promotion $promotion)
+    public function findByPromotion( $promotion)
     {
-        return $this->createQueryBuilder('f')
-            ->where('f.promotion=:val')
-            ->setParameter('val', $promotion)
-            ->getQuery()
-            ->getResult()
-            ;
+            return $this->createQueryBuilder('f')
+                ->where('f.promotion=:val')
+                ->setParameter('val', $promotion)
+                ->getQuery()
+                ->getResult();
+
     }
 
-    public function findByNiveau($value,Promotion $promotion)
+    public function findByNiveau($value, $promotion)
     {
-        return $this->createQueryBuilder('f')
-            ->andwhere('f.niveau=:val')
-            ->andwhere('f.promotion=:pro')
-            ->join('f.etudiants','e')
-            ->select('COUNT(e.id)')
-            ->setParameter('val', $value)
-            ->setParameter('pro', $promotion)
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
+
+            return $this->createQueryBuilder('f')
+                ->andwhere('f.niveau=:val')
+                ->andwhere('f.promotion=:pro')
+                ->join('f.etudiants', 'e')
+                ->select('COUNT(e.id)')
+                ->setParameter('val', $value)
+                ->setParameter('pro', $promotion)
+                ->getQuery()
+                ->getSingleScalarResult();
+
     }
 }

@@ -31,7 +31,7 @@ class FillierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $fillierRepository->add($fillier, true);
 
-            return $this->redirectToRoute('app_fillier_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_fillier_index');
         }
 
         return $this->renderForm('fillier/new.html.twig', [

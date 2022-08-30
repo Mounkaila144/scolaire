@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Etudiant;
+use App\Entity\Fillier;
 use App\Form\EtudiantType;
 use App\Repository\EtudiantRepository;
+use App\Repository\FillierRepository;
+use App\Repository\PromotionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +21,16 @@ class EtudiantController extends AbstractController
     {
         return $this->render('etudiant/index.html.twig', [
             'etudiants' => $etudiantRepository->findAll(),
+        ]);
+    }
+    #[Route('/byfillier/{id}/{pro}', name: 'app_etudiant_fillier', methods: ['GET'])]
+    public function fillier(int $id,int $pro,EtudiantRepository $etudiantRepository,FillierRepository $fillierRepository,PromotionRepository $promotionRepository): Response
+    {
+        $year=new \DateTime("$pro-01-01");
+        $promo=$promotionRepository->findOneBy(["annee"=>$year]);
+        $fillier=$fillierRepository->find($id);
+        return $this->render('etudiant/index.html.twig', [
+            'etudiants' => $etudiantRepository->findEtudiantByPromotionAndFillier($promo,$fillier),
         ]);
     }
 

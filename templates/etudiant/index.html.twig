@@ -40,9 +40,6 @@
                             <i class="ri-more-fill align-middle"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a  href="{{ path('app_etudiant_show', {'id': etudiant.id}) }}" class="dropdown-item"><i
-                                            class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a>
-                            </li>
                             <li><a href="{{ path('app_etudiant_edit', {'id': etudiant.id}) }}" class="dropdown-item edit-item-btn"><i
                                             class="ri-pencil-fill align-bottom me-2 text-muted"></i> Editer</a>
                             </li>
@@ -69,5 +66,4 @@
 
     {{ encore_entry_script_tags('datatable') }}
 
-    <a href="{{ path('app_etudiant_new') }}">Create new</a>
 {% endblock %}
